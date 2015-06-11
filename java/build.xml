@@ -110,9 +110,24 @@ xmlns:ivy="antlib:org.apache.ivy.ant">
 
 	<!-- TARGET: retrieve -->
 	<target name="retrieve" >
-		<taskdef resource="org/apache/ivy/ant/antlib.xml" uri="antlib:org.apache.ivy.ant" classpath="${ivy.jar}" />
+		<taskdef resource="org/apache/ivy/ant/antlib.xml" uri="antlib:org.apache.ivy.ant" classpath="/usr/share/java/ivy.jar" />
 		<ivy:retrieve/>
 	</target>
+
+
+	<!-- DELETE Hadoop-yarn*.jar  -->
+	<target name="delete_hadoop-yarn-jar_file">
+		<delete dir="${lib.dir}" includes="hadoop-yarn-*.jar" />
+	</target>
+
+	<!-- COPY Hadoop-yarn*.jar  -->
+	<target name="copy_hadoop-yarn-jar_file">
+		<copy preservelastmodified="true"
+			file="/home/gpu/workspace/hadoop/hadoop-dist/target/hadoop-2.6.0/share/hadoop/yarn/hadoop-yarn-*.jar"
+			tofile="${lib.dir}"
+			/>
+	</target>
+
 
 	<!-- TARGET: compile -->
 	<target name="compile" depends="init, resolve, do-compile" />
@@ -168,6 +183,14 @@ xmlns:ivy="antlib:org.apache.ivy.ant">
 	<target name="comp-src" >
 		<copy todir="${src.classes.dir}">
 			<fileset dir="${basedir}/src/resources" />
+		</copy>
+		<delete dir="${lib.dir}" includes="hadoop-yarn-api*.jar" />
+		<delete dir="${lib.dir}" includes="hadoop-yarn-common*.jar" />
+		<delete dir="${lib.dir}" includes="hadoop-yarn-client*.jar" />
+		<copy todir="${lib.dir}">
+			<fileset dir="/home/gpu/workspace/hadoop/hadoop-dist/target/hadoop-2.6.0/share/hadoop/yarn" includes="hadoop-yarn-api*.jar" />
+			<fileset dir="/home/gpu/workspace/hadoop/hadoop-dist/target/hadoop-2.6.0/share/hadoop/yarn" includes="hadoop-yarn-common*.jar" />
+			<fileset dir="/home/gpu/workspace/hadoop/hadoop-dist/target/hadoop-2.6.0/share/hadoop/yarn" includes="hadoop-yarn-client*.jar" />
 		</copy>
 		<javac
 			destdir="${src.classes.dir}"

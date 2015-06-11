@@ -9,7 +9,7 @@ MR4CINC = $(MR4C_HOME)/native/include
 MR4CGEOINC = $(MR4C_HOME)/geospatial/include
 MR4CLIB = $(MR4C_HOME)/native/lib
 
-GDALINC = /usr/local/include
+GDALINC = /usr/include/gdal
 GDALLIB = /usr/local/lib
 
 #default target

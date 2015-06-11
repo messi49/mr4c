@@ -27,6 +27,8 @@ public class HadoopConfig extends CategoryConfig {
 	public static final String PROP_MAX_CORES = "cores.max";
 	public static final String PROP_MIN_MEMORY = "memory.min";
 	public static final String PROP_MAX_MEMORY = "memory.max";
+	public static final String PROP_MIN_GPU_MEMORY = "gpu-memory.min";
+	public static final String PROP_MAX_GPU_MEMORY = "gpu-memory.max";
 	public static final String PROP_ALGORITHM_CLASSPATH = "algorithm.classpath";
 
 	public HadoopConfig() {

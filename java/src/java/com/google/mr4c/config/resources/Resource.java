@@ -37,6 +37,15 @@ public enum Resource implements ResourceInfo {
 		HadoopConfig.PROP_MAX_MEMORY,
 		"mapreduce.map.memory.mb",
 		"yarn.scheduler.maximum-allocation-mb"
+	),
+
+	GPU_MEMORY(
+		"gpu-memory",
+		Category.HADOOP,
+		HadoopConfig.PROP_MIN_GPU_MEMORY,
+		HadoopConfig.PROP_MAX_GPU_MEMORY,
+		"mapreduce.map.gpu-memory.mb",
+		"yarn.scheduler.maximum-allocation-gpu-mb"
 	);
 
 	private String m_name;

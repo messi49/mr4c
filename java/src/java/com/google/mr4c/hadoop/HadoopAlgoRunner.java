@@ -289,6 +289,7 @@ public abstract class HadoopAlgoRunner {
 		logProp("mapreduce.framework.name");
 		logProp("mapreduce.map.memory.mb");
 		logProp("mapreduce.map.cpu.vcores");
+		logProp("mapreduce.map.gpu-memory.mb");
 		for ( String propName : HadoopUtils.getHadoopBinding().getPropertiesToLog() ) {
 			logProp(propName);
 		}

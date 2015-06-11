@@ -21,18 +21,17 @@ import com.google.mr4c.config.resources.Resource;
 import com.google.mr4c.config.resources.ResourceConfig;
 import com.google.mr4c.config.resources.ResourceLimit;
 import com.google.mr4c.hadoop.HadoopBinding;
+import org.apache.hadoop.conf.Configuration;
+import org.apache.hadoop.mapred.JobConf;
+import org.apache.hadoop.yarn.api.records.NodeReport;
+import org.apache.hadoop.yarn.client.api.YarnClient;
+import org.apache.hadoop.yarn.exceptions.YarnException;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-
-import org.apache.hadoop.conf.Configuration;
-import org.apache.hadoop.mapred.JobConf;
-import org.apache.hadoop.yarn.client.api.YarnClient;
-import org.apache.hadoop.yarn.api.records.NodeReport;
-import org.apache.hadoop.yarn.exceptions.YarnException;
 
 public class YarnBinding implements HadoopBinding {
 
@@ -94,13 +93,17 @@ public class YarnBinding implements HadoopBinding {
 		List<ResourceLimit> limits = new ArrayList<ResourceLimit>();
 		int cores = 0;
 		int memory = 0;
+		int gpu_memory = 0;
+
 		for ( NodeReport report : reports ) {
 			org.apache.hadoop.yarn.api.records.Resource cap = report.getCapability();
 			cores = Math.max(cores, cap.getVirtualCores());
 			memory = Math.max(memory, cap.getMemory());
+			gpu_memory = Math.max(gpu_memory, cap.getGpuMemory());
 		}
 		limits.add(new ResourceLimit(Resource.CORES, cores, LimitSource.CLUSTER));
 		limits.add(new ResourceLimit(Resource.MEMORY, memory, LimitSource.CLUSTER));
+		limits.add(new ResourceLimit(Resource.GPU_MEMORY, gpu_memory, LimitSource.CLUSTER));
 		return limits;
 	}
 
