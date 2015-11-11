@@ -128,6 +128,23 @@ xmlns:ivy="antlib:org.apache.ivy.ant">
 			/>
 	</target>
 
+	<!-- DELETE Hadoop-mapreduce*.jar  -->
+	<target name="delete_hadoop-mapreduce-jar_file">
+		<delete dir="${lib.dir}" includes="hadoop-mapreduce-client-app-*.jar" />
+		<delete dir="${lib.dir}" includes="hadoop-mapreduce-client-core-*.jar" />
+	</target>
+
+	<!-- COPY Hadoop-yarn*.jar  -->
+	<target name="copy_hadoop-mapreduce-jar_file">
+		<copy preservelastmodified="true"
+			file="/home/gpu/workspace/hadoop/hadoop-dist/target/hadoop-2.6.0/share/hadoop/mapreduce/hadoop-mapreduce-client-app-*.jar"
+			tofile="${lib.dir}"
+			/>
+		<copy preservelastmodified="true"
+			file="/home/gpu/workspace/hadoop/hadoop-dist/target/hadoop-2.6.0/share/hadoop/mapreduce/hadoop-mapreduce-client-core-*.jar"
+			tofile="${lib.dir}"
+			/>
+	</target>
 
 	<!-- TARGET: compile -->
 	<target name="compile" depends="init, resolve, do-compile" />
@@ -191,6 +208,8 @@ xmlns:ivy="antlib:org.apache.ivy.ant">
 			<fileset dir="/home/gpu/workspace/hadoop/hadoop-dist/target/hadoop-2.6.0/share/hadoop/yarn" includes="hadoop-yarn-api*.jar" />
 			<fileset dir="/home/gpu/workspace/hadoop/hadoop-dist/target/hadoop-2.6.0/share/hadoop/yarn" includes="hadoop-yarn-common*.jar" />
 			<fileset dir="/home/gpu/workspace/hadoop/hadoop-dist/target/hadoop-2.6.0/share/hadoop/yarn" includes="hadoop-yarn-client*.jar" />
+			<fileset dir="/home/gpu/workspace/hadoop/hadoop-dist/target/hadoop-2.6.0/share/hadoop/mapreduce" includes="hadoop-mapreduce-client-app*.jar" />
+			<fileset dir="/home/gpu/workspace/hadoop/hadoop-dist/target/hadoop-2.6.0/share/hadoop/mapreduce" includes="hadoop-mapreduce-client-common-*.jar" />
 		</copy>
 		<javac
 			destdir="${src.classes.dir}"
