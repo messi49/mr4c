@@ -204,6 +204,8 @@ xmlns:ivy="antlib:org.apache.ivy.ant">
 		<delete dir="${lib.dir}" includes="hadoop-yarn-api*.jar" />
 		<delete dir="${lib.dir}" includes="hadoop-yarn-common*.jar" />
 		<delete dir="${lib.dir}" includes="hadoop-yarn-client*.jar" />
+		<delete dir="${lib.dir}" includes="hadoop-mapreduce-client-app*.jar" />
+		<delete dir="${lib.dir}" includes="hadoop-mapreduce-client-common*.jar" />
 		<copy todir="${lib.dir}">
 			<fileset dir="/home/gpu/workspace/hadoop/hadoop-dist/target/hadoop-2.6.0/share/hadoop/yarn" includes="hadoop-yarn-api*.jar" />
 			<fileset dir="/home/gpu/workspace/hadoop/hadoop-dist/target/hadoop-2.6.0/share/hadoop/yarn" includes="hadoop-yarn-common*.jar" />
